@@ -7,6 +7,7 @@ plugins {
 	kotlin("plugin.spring") version "1.6.10"
 	kotlin("plugin.jpa") version "1.6.10"
 	kotlin("plugin.allopen") version "1.4.32"
+	kotlin("kapt") version "1.4.32"
 }
 
 allOpen {
@@ -32,7 +33,15 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+		exclude(module = "junit")
+		exclude(module = "mockito-core")
+	}
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+	testImplementation("com.ninja-squad:springmockk:3.1.0")
+
+	kapt("org.springframework.boot:spring-boot-configuration-processor")
 }
 
 tasks.withType<KotlinCompile> {

@@ -11,6 +11,13 @@ import javax.persistence.ManyToOne
 //TODO: Stopped the tutorial here
 //https://spring.io/guides/tutorials/spring-boot-kotlin/
 
+
+/*
+
+Here we don’t use data classes with val properties because JPA is not designed to work with immutable classes or the methods generated automatically by data classes.
+ If you are using other Spring Data flavor, most of them are designed to support such constructs so you should use classes like data class User(val login: String, …) when using Spring Data MongoDB, Spring Data JDBC, etc.
+ */
+
 @Entity
 class Article(
         var title: String,
